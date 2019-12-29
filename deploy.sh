@@ -10,9 +10,7 @@ docker push edgarsc/multi-client:$SHA
 docker push edgarsc/multi-server:$SHA
 docker push edgarsc/multi-worker:$SHA
 
-kubectl apply -f k8s
+kubectl apply -f k8ss
 kubectl set image deployments/server-deployment server=edgarsc/multi-server:$SHA
 kubectl set image deployments/client-deployment client=edgarsc/multi-client:$SHA
 kubectl set image deployments/worker-deployment worker=edgarsc/multi-worker:$SHA
-
-kubectl apply -f k8s/postgres-deployment.yaml --force
