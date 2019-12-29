@@ -19,10 +19,10 @@ spec:
               accessModes:
                 - ReadWriteMany
       containers:
-      - name: postgress
-        image: postgress
+      - name: postgres
+        image: postgres
         ports:
-        - containerPort: 5433
+        - containerPort: 5432
         volumeMounts:
           - name: postgres-storage
             mountPath: /var/lib/postgresql/data
