@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1alpha2 
+kind: Certificate
+metadata:
+  name: makefun-dev-tls
+spec:
+  secretName: makefun-dev
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: makefun.dev
+  dnsNames:
+    - makefun.dev
+    - www.makefun.dev
+  acme:
+    config:
+      - http01:
+          ingressClass: nginx
+        domains:
+          - makefun.dev
+          - www.makefun.dev         
