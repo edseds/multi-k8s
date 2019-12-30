@@ -5,10 +5,18 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$1
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: 'true'
 # UPDATE THIS LINE ABOVE
 spec:
+  tls:
+    - hosts:
+        - makefun.dev
+        - www.makefun.dev
+      secretName: makefun-dev
   rules:
-    - http:
+    - host: makefun.dev
+      http:
         paths:
           - path: /?(.*)
           # UPDATE THIS LINE ABOVE
@@ -20,3 +28,17 @@ spec:
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 5000
+    - host: www.makefun.dev
+      http:
+        paths:
+          - path: /?(.*)
+          # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: client-cluster-ip-service
+              servicePort: 3000
+          - path: /api/?(.*)
+          # UPDATE THIS LINE ABOVE
+            backend:
+              serviceName: server-cluster-ip-service
+              servicePort: 5000
+              

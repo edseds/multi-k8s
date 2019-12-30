@@ -17,4 +17,5 @@ spec:
           ingressClass: nginx
         domains:
           - makefun.dev
-          - www.makefun.dev         
+          - www.makefun.dev
+                   
